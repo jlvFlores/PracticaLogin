@@ -13,10 +13,18 @@ function login(e) {
     let passwordVal = password.value;
 
     if(usuarioVal == '' || passwordVal == '') {
+        creaMensaje('Verifica tus campos', 'danger');
         return;
     }
 
-    console.log('el valor para user es:' + usuarioVal);
-    console.log('el valor para user es:' + passwordVal);
-
+    if (localStorage.getItem('usuario')){
+        let objecto = JSON.parse(localStorage.getItem('usuario'));
+        if( usuarioVal == objecto.user && passwordVal == objecto.pass ){
+            creaMensaje('Usuario correcto', 'success');
+        } else {
+            creaMensaje('Usuario incorrecto', 'danger');
+        }
+    } else {
+        creaMensaje('No hay registros', 'danger');
+    }
 }
